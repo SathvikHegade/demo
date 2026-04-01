@@ -62,7 +62,7 @@ def detect_datatype_noise(df: pd.DataFrame) -> DataTypeNoiseReport:
     for col in df.columns:
         if pd.api.types.is_object_dtype(df[col]) or pd.api.types.is_string_dtype(df[col]):
             s_clean = df[col].dropna().astype(str)
-            numeric_like = s_clean.str.contains(r'^[\$\€\£]?\s*\-?[\d,]+(\.\d+)?\s*[kKmMbB]?\s*$', regex=True).sum()
+            numeric_like = s_clean.str.contains(r'^[\$\€\£]?\s*\-?[\d,]+(?:\.\d+)?\s*[kKmMbB]?\s*$', regex=True).sum()
             
             if numeric_like > 0 and numeric_like < len(s_clean):
                 type_mismatch += numeric_like
