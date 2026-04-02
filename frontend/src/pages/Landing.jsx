@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useAnalysisStore } from '../store/analysisStore';
 
 const FEATURES = [
-  { icon: '⚖', label: 'Bias Detection',    desc: 'Demographic + proxy fairness metrics' },
-  { icon: '〰', label: 'Noise Analysis',    desc: 'Outliers, type errors, missing values' },
-  { icon: '⧉', label: 'Duplicate Scan',    desc: 'Exact & near-duplicate row clustering' },
-  { icon: '⚡', label: 'AI Narratives',     desc: 'Gemini-powered issue recommendations' },
+  { icon: '⚖', label: 'Bias Detection', desc: 'Demographic + proxy fairness metrics' },
+  { icon: '〰', label: 'Noise Analysis', desc: 'Outliers, type errors, missing values' },
+  { icon: '⧉', label: 'Duplicate Scan', desc: 'Exact & near-duplicate row clustering' },
+  { icon: '⚡', label: 'AI Narratives', desc: 'Gemini-powered issue recommendations' },
 ];
 
 export const Landing = () => {
@@ -54,7 +54,7 @@ export const Landing = () => {
 
         {/* Headline */}
         <div className="animate-fade-up stagger-1" style={{ textAlign: 'center', marginBottom: 20 }}>
-          <h1 style={{ fontFamily: 'Roboto Mono', fontWeight: 800, fontSize: 'clamp(42px, 7vw, 80px)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#f0f0f8' }}>
+          <h1 style={{ fontWeight: 800, fontSize: 'clamp(42px, 7vw, 80px)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#f0f0f8' }}>
             Forge{' '}
             <span style={{ background: 'linear-gradient(135deg,#ff6b2b 0%,#9b59f5 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Production-Ready
@@ -93,13 +93,13 @@ export const Landing = () => {
             }}
           >
             {/* Corner accents */}
-            {[['0','0','right','bottom'],['0','auto','left','bottom'],['auto','0','right','top'],['auto','auto','left','top']].map(([t,b,r,l], i) => (
+            {[['0', '0', 'right', 'bottom'], ['0', 'auto', 'left', 'bottom'], ['auto', '0', 'right', 'top'], ['auto', 'auto', 'left', 'top']].map(([t, b, r, l], i) => (
               <div key={i} style={{ position: 'absolute', top: t === 'auto' ? undefined : 12, bottom: b === 'auto' ? undefined : 12, right: r === 'auto' ? undefined : 12, left: l === 'auto' ? undefined : 12, width: 16, height: 16, borderTop: (t !== 'auto') ? '1.5px solid rgba(255,107,43,0.4)' : 'none', borderBottom: (b !== 'auto') ? '1.5px solid rgba(255,107,43,0.4)' : 'none', borderRight: (r !== 'auto') ? '1.5px solid rgba(255,107,43,0.4)' : 'none', borderLeft: (l !== 'auto') ? '1.5px solid rgba(255,107,43,0.4)' : 'none' }} />
             ))}
 
             <div style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(255,107,43,0.1)', border: '1px solid rgba(255,107,43,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" strokeWidth="1.5">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
               </svg>
             </div>
 

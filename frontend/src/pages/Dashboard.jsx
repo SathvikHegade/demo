@@ -55,7 +55,7 @@ export const Dashboard = () => {
   if (status === 'error') return (
     <div style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 20 }}>
       <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'rgba(255,59,92,0.1)', border: '1px solid rgba(255,59,92,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
       </div>
       <div style={{ fontFamily: 'Syne, Cascadia Code', fontWeight: 700, fontSize: 18, color: '#f0f0f8' }}>Analysis Failed</div>
       <div style={{ fontFamily: 'Inter, Cascadia Code', fontSize: 13, color: '#7a7a9a', maxWidth: 400, textAlign: 'center' }}>{errorMessage}</div>
@@ -88,16 +88,16 @@ export const Dashboard = () => {
 
   // ── Report ───────────────────────────────────────────────────────────────────
   const r = results;
-  const critCount  = r.issues.filter(i => i.severity === 'CRITICAL').length;
-  const warnCount  = r.issues.filter(i => i.severity === 'WARNING').length;
-  const infoCount  = r.issues.filter(i => i.severity === 'INFO').length;
+  const critCount = r.issues.filter(i => i.severity === 'CRITICAL').length;
+  const warnCount = r.issues.filter(i => i.severity === 'WARNING').length;
+  const infoCount = r.issues.filter(i => i.severity === 'INFO').length;
   const totalCount = Math.max(r.issues.length, 1);
 
   const noiseData = {
-    outliers:    r.noise_report.outlier_details.reduce((s, o) => s + o.outlier_count, 0),
+    outliers: r.noise_report.outlier_details.reduce((s, o) => s + o.outlier_count, 0),
     typeMismatch: Object.values(r.noise_report.formatting_errors).reduce((s, v) => s + v, 0),
-    valueNoise:  r.noise_report.total_missing_cells,
-    structural:  r.noise_report.constant_columns.length,
+    valueNoise: r.noise_report.total_missing_cells,
+    structural: r.noise_report.constant_columns.length,
   };
 
   const imbalanceRatio = r.imbalance_report.imbalance_ratio;
@@ -132,7 +132,7 @@ export const Dashboard = () => {
             <button
               onClick={() => navigate(`/report/${currentJobId || 'report'}`)}
               style={{ fontFamily: 'Space Mono, monospace', fontSize: 11, color: '#ff6b2b', border: '1px solid rgba(255,107,43,0.3)', background: 'rgba(255,107,43,0.08)', borderRadius: 8, padding: '10px 20px', cursor: 'pointer', letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" /></svg>
               EXPORT PDF
             </button>
           </div>
@@ -189,10 +189,10 @@ export const Dashboard = () => {
                     <div style={{ height: 6, borderRadius: 99, overflow: 'hidden', display: 'flex', gap: 2, background: 'rgba(255,255,255,0.04)' }}>
                       <div style={{ width: `${critCount / totalCount * 100}%`, background: '#ff3b5c', transition: 'width 0.8s ease', borderRadius: '99px 0 0 99px' }} />
                       <div style={{ width: `${warnCount / totalCount * 100}%`, background: '#f5a623', transition: 'width 0.8s ease' }} />
-                      <div style={{ width: `${infoCount  / totalCount * 100}%`, background: '#9b59f5', transition: 'width 0.8s ease', borderRadius: '0 99px 99px 0' }} />
+                      <div style={{ width: `${infoCount / totalCount * 100}%`, background: '#9b59f5', transition: 'width 0.8s ease', borderRadius: '0 99px 99px 0' }} />
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
-                      {[['#ff3b5c','CRITICAL', critCount], ['#f5a623','WARN', warnCount], ['#9b59f5','INFO', infoCount]].map(([c,l,v]) => (
+                      {[['#ff3b5c', 'CRITICAL', critCount], ['#f5a623', 'WARN', warnCount], ['#9b59f5', 'INFO', infoCount]].map(([c, l, v]) => (
                         <div key={l} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                           <div style={{ width: 6, height: 6, borderRadius: '50%', background: c }} />
                           <span style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a' }}>{l} ({v})</span>
@@ -251,8 +251,8 @@ export const Dashboard = () => {
                     {r.issues.filter(i => i.category === 'bias').length === 0
                       ? <p style={{ fontFamily: 'Inter', fontSize: 13, color: '#5a5a7a' }}>No bias issues detected.</p>
                       : r.issues.filter(i => i.category === 'bias').map(i => (
-                          <IssueCard key={i.id} title={`Bias — ${i.column || 'dataset'}`} severity={i.severity} description={i.description} recommendation={i.recommendation} />
-                        ))
+                        <IssueCard key={i.id} title={`Bias — ${i.column || 'dataset'}`} severity={i.severity} description={i.description} recommendation={i.recommendation} />
+                      ))
                     }
                   </Card>
                 </div>
@@ -265,7 +265,7 @@ export const Dashboard = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <Card><SectionTitle accent="#ff6b2b">Noise Breakdown</SectionTitle><NoiseDonut data={noiseData} />
                     <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                      {[['#ff6b2b','Outliers', noiseData.outliers], ['#f5a623','Formatting', noiseData.typeMismatch], ['#9b59f5','Missing Cells', noiseData.valueNoise], ['#5a5a7a','Constant Cols', noiseData.structural]].map(([c,l,v]) => (
+                      {[['#ff6b2b', 'Outliers', noiseData.outliers], ['#f5a623', 'Formatting', noiseData.typeMismatch], ['#9b59f5', 'Missing Cells', noiseData.valueNoise], ['#5a5a7a', 'Constant Cols', noiseData.structural]].map(([c, l, v]) => (
                         <div key={l} style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ fontFamily: 'Space Mono, monospace', fontSize: 10, color: c }}>{l}</span>
                           <span style={{ fontFamily: 'Space Mono, monospace', fontSize: 10, color: '#f0f0f8' }}>{v.toLocaleString()}</span>

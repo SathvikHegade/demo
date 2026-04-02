@@ -26,9 +26,9 @@ export const ScoreRing = ({ value, label, size = 120, stroke = 8 }) => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
       <div style={{ position: 'relative', width: size, height: size }}>
         <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
-          <circle cx={size/2} cy={size/2} r={radius} fill="none"
+          <circle cx={size / 2} cy={size / 2} r={radius} fill="none"
             stroke="rgba(255,255,255,0.05)" strokeWidth={stroke} />
-          <circle cx={size/2} cy={size/2} r={radius} fill="none"
+          <circle cx={size / 2} cy={size / 2} r={radius} fill="none"
             stroke={color} strokeWidth={stroke}
             strokeDasharray={circ} strokeDashoffset={offset}
             strokeLinecap="round"

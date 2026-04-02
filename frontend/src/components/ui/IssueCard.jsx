@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 const SEV = {
   CRITICAL: { dot: '#ff3b5c', chip: 'chip chip-critical', label: 'CRITICAL' },
-  WARNING:  { dot: '#f5a623', chip: 'chip chip-warning',  label: 'WARNING'  },
-  INFO:     { dot: '#9b59f5', chip: 'chip chip-info',     label: 'INFO'     },
+  WARNING: { dot: '#f5a623', chip: 'chip chip-warning', label: 'WARNING' },
+  INFO: { dot: '#9b59f5', chip: 'chip chip-info', label: 'INFO' },
   Critical: { dot: '#ff3b5c', chip: 'chip chip-critical', label: 'CRITICAL' },
-  Warning:  { dot: '#f5a623', chip: 'chip chip-warning',  label: 'WARNING'  },
+  Warning: { dot: '#f5a623', chip: 'chip chip-warning', label: 'WARNING' },
 };
 
 export const IssueCard = ({ title, severity, description, recommendation }) => {
