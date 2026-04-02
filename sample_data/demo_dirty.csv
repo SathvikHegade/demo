@@ -1,0 +1,501 @@
+id,age,gender,income,category,score,email,notes
+168,,male,53800.0,USA,0,,El cliente solicitó un reembolso
+261,32.0,male,12600.0,U.S.A,0,,El cliente solicitó un reembolso
+362,22.0,male,28100.0,Canada,0,,Compte fermé
+44,41.0,female,38200.0,U.S.A,1,,Flagged for review
+389,49.0,female,31300.0,U.S.A,0,,New registration
+14,26.0,male,15100.0,USA,0,,Good standing account
+179,33.0,male,37400.0,USA,0,,Necesita seguimiento
+236,24.0,female,"$14,400",USA,0,,Cuenta en buen estado
+443,25.0,male,"$5,100",UK,0,,El cliente solicitó un reembolso
+224,28.0,female,129400.0,USA,0,,Account closed
+327,45.0,female,44500.0,United Kingdom,0,,Le client a demandé un remboursement
+44,41.0,female,38200.0,U.S.A,1,,Flagged for review
+191,29.0,female,35500.0,United States,0,,El cliente solicitó un reembolso
+31,19.0,female,59400.0,us,1,,El cliente solicitó un reembolso
+160,66.0,male,52100.0,u.k.,0,,Necesita seguimiento
+52,66.0,male,115800.0,Canada,0,,Bon état du compte
+101,52.0,male,101700.0,us,0,,Bon état du compte
+165,44.0,male,132400.0,canada,0,,Necesita seguimiento
+227,23.0,male,51800.0,United Kingdom,0,,Cliente VIP
+197,67.0,female,67100.0,USA,0,,Le client a demandé un remboursement
+352,55.0,male,48100.0,USA,0,,Bon état du compte
+463,34.0,male,31700.0,us,0,,Account closed
+3,59.0,male,30300.0,united states,0,,Cuenta en buen estado
+73,60.0,male,9100.0,USA,0,,Cliente VIP
+23,60.0,female,37400.0,Canada,0,,Compte fermé
+3,59.0,male,30300.0,united states,0,,Cuenta en buen estado
+465,66.0,male,"$43,600",Britain,1,,New registration
+147,40.0,male,26200.0,United Kingdom,0,,Cuenta en buen estado
+358,,female,40000.0,USA,0,,Cuenta en buen estado
+415,48.0,male,83800.0,USA,1,,Le client a demandé un remboursement
+252,24.0,female,7600.0,United Kingdom,1,,Flagged for review
+213,20.0,female,51000.0,u.k.,0,,Compte fermé
+390,56.0,male,50700.0,u.k.,0,,New registration
+307,69.0,male,82100.0,U.S.A,0,,Le client a demandé un remboursement
+183,41.0,male,14700.0,CAN,0,,Bon état du compte
+85,,female,30400.0,USA,1,,Bon état du compte
+158,51.0,female,7300.0,USA,0,,Cuenta en buen estado
+242,,male,64800.0,canada,1,,VIP customer
+259,,female,22900.0,USA,0,,VIP customer
+262,54.0,male,6700.0,U.S.,0,,Bon état du compte
+159,43.0,male,11800.0,canada,0,,Account closed
+360,25.0,male,146100.0,USA,0,,Necesita seguimiento
+110,42.0,male,36600.0,UK,0,,Needs follow-up
+340,41.0,male,62100.0,united states,0,,Bon état du compte
+50,32.0,female,51300.0,USA,0,,Account closed
+259,,female,22900.0,USA,0,,VIP customer
+320,34.0,male,16900.0,Britain,0,,Flagged for review
+4,60.0,male,55000.0,CAN,1,,Account closed
+316,22.0,male,46500.0,united states,0,,Cuenta en buen estado
+156,52.0,male,77500.0,U.S.A,0,,VIP customer
+190,25.0,male,25400.0,US,0,,Cuenta en buen estado
+77,26.0,male,37300.0,Canada,0,,Good standing account
+117,62.0,male,48600.0,USA,0,,Nouveau compte
+405,61.0,male,23200.0,USA,0,,Compte fermé
+467,44.0,male,153500.0,united states,0,,VIP customer
+128,49.0,male,31000.0,UK,0,,Cliente VIP
+126,67.0,female,10400.0,United States,0,,El cliente solicitó un reembolso
+308,41.0,male,47300.0,United States,1,,Flagged for review
+120,59.0,male,48900.0,UK,0,,Account closed
+153,64.0,male,11700.0,USA,0,,El cliente solicitó un reembolso
+40,41.0,male,47700.0,canada,0,hlprmlf@hotmail.com,VIP customer
+275,,male,21400.0,canada,0,,Needs follow-up
+1,66.0,male,82800.0,UK,0,,Account closed
+68,47.0,male,29100.0,USA,0,,Needs follow-up
+294,42.0,female,8000.0,UK,0,,Cliente VIP
+276,66.0,male,73800.0,UK,0,,VIP customer
+371,40.0,male,24700.0,USA,0,,Nouveau compte
+333,,male,8100.0,united states,0,,Nouveau compte
+212,21.0,male,45400.0,united states,0,,Flagged for review
+35,40.0,female,98100.0,United States,0,,Cuenta en buen estado
+248,68.0,male,70600.0,USA,0,,Needs follow-up
+205,312.0,male,21600.0,USA,0,,Bon état du compte
+23,58.0,male,115100.0,USA,0,,Customer requested a refund
+290,35.0,male,33400.0,USA,0,,Cuenta en buen estado
+460,43.0,male,49000.0,UK,0,,Bon état du compte
+163,46.0,male,"$17,800",United Kingdom,0,,El cliente solicitó un reembolso
+114,47.0,male,43500.0,United Kingdom,0,,Cliente VIP
+462,50.0,male,98300.0,U.S.,0,,Flagged for review
+335,22.0,male,47800.0,United States,0,,Necesita seguimiento
+289,68.0,male,"$24,300",CAN,0,,Le client a demandé un remboursement
+252,24.0,female,7600.0,United Kingdom,1,,Flagged for review
+111,27.0,male,8200.0,u.k.,0,,Nouveau compte
+207,19.0,male,10200.0,USA,0,,Cuenta en buen estado
+267,43.0,male,"$79,900",CAN,0,,Good standing account
+92,64.0,male,10900.0,USA,0,,Flagged for review
+70,42.0,male,37000.0,Canada,0,,Compte fermé
+223,34.0,male,27200.0,us,0,,Cliente VIP
+246,49.0,male,33300.0,US,0,,El cliente solicitó un reembolso
+416,61.0,male,24700.0,US,0,,Le client a demandé un remboursement
+81,220.0,male,50500.0,united states,1,,Customer requested a refund
+383,40.0,male,225300.0,U.S.A,0,,Good standing account
+395,58.0,male,44100.0,USA,0,,VIP customer
+314,40.0,male,62400.0,US,0,,Compte fermé
+69,50.0,male,37400.0,u.k.,1,,Good standing account
+442,42.0,female,12600.0,united states,0,,Le client a demandé un remboursement
+152,,male,20600.0,USA,0,,Cuenta en buen estado
+119,38.0,female,"$84,100",United States,0,,Needs follow-up
+352,55.0,male,48100.0,USA,0,,Bon état du compte
+313,58.0,male,16300.0,U.S.A,0,,El cliente solicitó un reembolso
+398,40.0,male,37100.0,CAN,0,,El cliente solicitó un reembolso
+84,56.0,male,"$34,900",USA,0,,Bon état du compte
+402,33.0,male,23500.0,USA,0,,Customer requested a refund
+421,56.0,male,38900.0,United States,0,,Customer requested a refund
+54,46.0,male,135700.0,USA,0,,Account closed
+30,28.0,male,143600.0,U.S.,1,,Compte fermé
+329,52.0,female,16300.0,USA,0,,Cuenta en buen estado
+155,19.0,male,"$72,600",u.k.,0,,Necesita seguimiento
+374,37.0,male,16800.0,U.S.A,0,,Good standing account
+203,,female,104800.0,USA,0,,Needs follow-up
+183,41.0,male,14700.0,CAN,0,,Bon état du compte
+447,42.0,female,16200.0,USA,1,,Bon état du compte
+175,,male,33100.0,united states,0,,El cliente solicitó un reembolso
+62,24.0,male,39400.0,USA,0,,Flagged for review
+58,58.0,male,7900.0,United States,0,,New registration
+59,22.0,male,"$40,900",US,0,,Le client a demandé un remboursement
+178,55.0,male,15800.0,U.S.A,0,,Needs follow-up
+273,37.0,male,109700.0,U.S.A,0,,Bon état du compte
+382,27.0,female,31300.0,Canada,1,,VIP customer
+329,52.0,female,16300.0,USA,0,,Cuenta en buen estado
+229,62.0,female,31700.0,canada,0,,New registration
+130,52.0,male,218500.0,United States,0,,El cliente solicitó un reembolso
+113,38.0,male,16300.0,united states,1,,Customer requested a refund
+257,29.0,female,16500.0,USA,0,,VIP customer
+95,21.0,male,52100.0,USA,0,,Cliente VIP
+1,,male,14500.0,United States,0,,Necesita seguimiento
+464,,male,4900.0,United States,0,,Flagged for review
+412,52.0,male,30000.0,United Kingdom,0,,Good standing account
+272,27.0,male,42100.0,USA,0,,El cliente solicitó un reembolso
+287,40.0,male,11900.0,United Kingdom,0,,Nouveau compte
+428,18.0,male,18600.0,USA,0,,Necesita seguimiento
+260,61.0,male,29600.0,USA,0,,Good standing account
+212,21.0,male,45400.0,united states,0,,Flagged for review
+74,18.0,male,8500.0,UK,0,,Customer requested a refund
+93,41.0,male,114700.0,U.S.A,0,,Customer requested a refund
+443,25.0,male,"$5,100",UK,0,,El cliente solicitó un reembolso
+65,46.0,male,"$7,700",USA,0,,Cuenta en buen estado
+34,37.0,male,10100.0,canada,0,,New registration
+440,69.0,male,50800.0,USA,0,,Le client a demandé un remboursement
+22,69.0,female,118000.0,Canada,0,,Le client a demandé un remboursement
+37,19.0,male,22000.0,USA,0,,Needs follow-up
+411,214.0,female,149800.0,United States,0,,El cliente solicitó un reembolso
+342,,male,33100.0,USA,0,,Good standing account
+351,22.0,male,100900.0,United States,0,,Needs follow-up
+42,54.0,male,40300.0,United States,0,,Bon état du compte
+102,40.0,male,39700.0,USA,1,,El cliente solicitó un reembolso
+409,33.0,male,108700.0,Canada,0,,Needs follow-up
+384,26.0,male,51800.0,United States,0,,New registration
+431,62.0,male,79100.0,Canada,0,,Compte fermé
+310,22.0,male,30200.0,Canada,0,,Bon état du compte
+167,66.0,male,125700.0,United States,0,,New registration
+318,29.0,male,26800.0,u.k.,0,,Le client a demandé un remboursement
+268,41.0,male,"$91,700",canada,0,,Bon état du compte
+231,,male,"$42,700",United States,0,,Good standing account
+437,23.0,male,30100.0,Britain,1,,Account closed
+286,68.0,male,139600.0,United Kingdom,0,,Flagged for review
+133,26.0,female,61900.0,us,0,,Account closed
+184,24.0,male,50400.0,United Kingdom,0,,Le client a demandé un remboursement
+60,,male,37200.0,USA,0,,Compte fermé
+9,24.0,male,14600.0,United Kingdom,0,,Cliente VIP
+381,54.0,male,47700.0,USA,0,,Customer requested a refund
+439,65.0,male,22700.0,United Kingdom,0,,El cliente solicitó un reembolso
+274,32.0,female,122200.0,United States,0,,Necesita seguimiento
+26,25.0,male,50500.0,United States,0,,Flagged for review
+3,34.0,male,31800.0,u.k.,0,,Flagged for review
+67,55.0,male,11700.0,United Kingdom,1,,Account closed
+75,64.0,male,21100.0,us,0,,VIP customer
+425,57.0,male,41600.0,us,0,,Cliente VIP
+410,62.0,male,53500.0,Canada,0,,Nouveau compte
+161,66.0,male,37200.0,U.S.A,0,,Bon état du compte
+190,25.0,male,25400.0,US,0,,Cuenta en buen estado
+461,,male,44100.0,U.S.A,0,,El cliente solicitó un reembolso
+90,46.0,male,93900.0,United States,0,,Le client a demandé un remboursement
+434,62.0,male,13400.0,USA,0,,Account closed
+379,,male,108100.0,UK,0,,Customer requested a refund
+331,68.0,male,71800.0,U.S.A,0,,Cuenta en buen estado
+18,35.0,male,40300.0,canada,1,,Customer requested a refund
+116,52.0,male,14400.0,canada,0,,Compte fermé
+38,44.0,male,45200.0,us,0,,Needs follow-up
+23,66.0,male,37900.0,us,0,,Needs follow-up
+388,,male,12100.0,USA,0,,Flagged for review
+112,,male,87600.0,Britain,0,,Good standing account
+43,20.0,male,30800.0,United States,0,,Nouveau compte
+399,,female,24300.0,USA,0,,Necesita seguimiento
+263,65.0,male,"$34,700",USA,0,,Cuenta en buen estado
+154,32.0,male,56600.0,USA,0,,Account closed
+377,50.0,male,"$36,700",Canada,0,,Cuenta en buen estado
+50,32.0,female,51300.0,USA,0,,Account closed
+177,,male,126600.0,Canada,0,,Needs follow-up
+254,,female,9700.0,USA,0,,Needs follow-up
+469,44.0,male,26100.0,Canada,0,,Nouveau compte
+148,38.0,male,95900.0,u.k.,0,,Bon état du compte
+144,54.0,female,43200.0,U.S.A,0,,Cliente VIP
+169,25.0,male,65400.0,united states,0,,New registration
+317,35.0,male,180400.0,United Kingdom,0,,Bon état du compte
+181,42.0,female,19900.0,UK,1,,VIP customer
+470,61.0,female,27800.0,us,0,,Compte fermé
+427,46.0,male,50300.0,Canada,0,,Needs follow-up
+456,64.0,male,19700.0,U.S.A,1,,Account closed
+107,30.0,male,28200.0,U.S.A,0,rjteokv@outlook.com,Compte fermé
+10,44.0,female,114600.0,United States,0,,Necesita seguimiento
+323,58.0,male,114500.0,CAN,0,,Nouveau compte
+53,42.0,female,"$26,100",Canada,0,,Flagged for review
+196,19.0,male,28200.0,USA,0,,VIP customer
+367,31.0,female,13500.0,USA,0,,Nouveau compte
+78,69.0,male,47500.0,Canada,0,,El cliente solicitó un reembolso
+197,67.0,female,67100.0,USA,0,,Le client a demandé un remboursement
+47,20.0,male,119100.0,Canada,0,,VIP customer
+276,66.0,male,73800.0,UK,0,,VIP customer
+305,32.0,female,"$89,700",UK,0,,Bon état du compte
+61,22.0,male,56100.0,Canada,0,,VIP customer
+238,58.0,male,13400.0,USA,0,,Le client a demandé un remboursement
+24,52.0,male,94400.0,USA,1,,Account closed
+142,29.0,male,94900.0,us,0,,VIP customer
+79,37.0,male,170600.0,united states,0,,Bon état du compte
+141,37.0,male,35000.0,us,1,,El cliente solicitó un reembolso
+444,,female,26900.0,USA,0,,Cuenta en buen estado
+346,35.0,male,29000.0,U.S.A,0,,Cliente VIP
+96,30.0,female,72900.0,United States,0,,Account closed
+193,39.0,male,51500.0,USA,0,,Necesita seguimiento
+299,68.0,male,21200.0,USA,0,,Cuenta en buen estado
+186,59.0,female,44400.0,us,0,,Necesita seguimiento
+173,36.0,male,48200.0,CAN,0,,Customer requested a refund
+86,,female,"$14,200",us,0,,El cliente solicitó un reembolso
+280,54.0,male,49900.0,United States,0,,Nouveau compte
+224,28.0,female,129400.0,USA,0,,Account closed
+140,62.0,male,3500.0,USA,0,,Customer requested a refund
+185,61.0,male,28300.0,USA,0,,Needs follow-up
+90,,male,20500.0,US,0,,Le client a demandé un remboursement
+243,26.0,male,61200.0,CAN,0,,Le client a demandé un remboursement
+368,,male,"$17,700",USA,0,,Flagged for review
+292,26.0,male,89800.0,USA,0,,Bon état du compte
+240,,male,"$36,000",USA,0,,Flagged for review
+455,61.0,male,45800.0,U.S.A,0,,Le client a demandé un remboursement
+315,18.0,male,188800.0,USA,0,,New registration
+325,60.0,male,20100.0,U.S.A,0,,Cliente VIP
+3,39.0,male,12200.0,USA,1,,Necesita seguimiento
+131,68.0,male,"$20,300",UK,0,,Cliente VIP
+433,46.0,male,12300.0,USA,0,,Necesita seguimiento
+80,53.0,male,36000.0,U.S.A,1,,Bon état du compte
+182,55.0,male,"$68,600",USA,0,,Good standing account
+43,,female,23600.0,U.S.A,0,,Le client a demandé un remboursement
+25,55.0,male,13600.0,united states,0,,Needs follow-up
+157,23.0,female,18100.0,U.S.,0,,Bon état du compte
+235,,male,6000.0,USA,0,,Le client a demandé un remboursement
+296,,male,38100.0,Britain,0,,Customer requested a refund
+32,,female,17500.0,USA,0,,Cliente VIP
+129,18.0,female,19100.0,U.S.A,0,,El cliente solicitó un reembolso
+413,55.0,male,"$14,800",USA,0,,Good standing account
+220,43.0,male,"$20,500",USA,0,,Necesita seguimiento
+64,33.0,male,10300.0,UK,0,,VIP customer
+230,,male,52300.0,United States,1,,New registration
+438,,male,22100.0,us,0,,El cliente solicitó un reembolso
+127,,male,20500.0,U.S.A,0,,New registration
+334,59.0,female,68600.0,U.S.A,0,,Le client a demandé un remboursement
+337,,male,"$39,600",United States,0,,Cliente VIP
+217,64.0,male,123700.0,USA,0,,New registration
+8,62.0,male,157900.0,us,0,,VIP customer
+27,,male,73800.0,USA,0,,VIP customer
+64,35.0,male,117900.0,U.S.,1,,Le client a demandé un remboursement
+432,47.0,male,59500.0,Canada,0,,El cliente solicitó un reembolso
+376,53.0,male,11500.0,u.k.,0,,Compte fermé
+121,58.0,male,22100.0,CAN,0,,Account closed
+49,43.0,female,38200.0,united states,0,,New registration
+28,39.0,female,104300.0,United Kingdom,0,,Customer requested a refund
+94,33.0,male,21700.0,United States,0,,Necesita seguimiento
+466,66.0,male,46200.0,u.k.,0,,Cliente VIP
+63,62.0,male,53200.0,U.S.A,0,,Bon état du compte
+81,41.0,female,115400.0,USA,0,,Cuenta en buen estado
+291,48.0,male,55200.0,U.S.,0,,Le client a demandé un remboursement
+96,32.0,male,166700.0,UK,0,,Nouveau compte
+424,68.0,male,33800.0,U.S.A,0,,Necesita seguimiento
+21,35.0,male,34600.0,Britain,0,,VIP customer
+407,43.0,male,343600.0,United States,0,,Nouveau compte
+303,19.0,male,49300.0,U.S.A,0,,Account closed
+429,54.0,male,67900.0,united states,0,shikkhd@hotmail.com,Cuenta en buen estado
+202,30.0,male,"$2,000",United States,0,,New registration
+339,18.0,female,30500.0,USA,0,,Necesita seguimiento
+380,25.0,male,19200.0,USA,0,,Flagged for review
+258,42.0,male,163700.0,United States,0,,Customer requested a refund
+387,,male,17300.0,us,0,,VIP customer
+5,30.0,male,53300.0,United States,0,,Le client a demandé un remboursement
+418,,male,27300.0,Canada,0,,Account closed
+222,50.0,female,79200.0,USA,0,,Necesita seguimiento
+468,31.0,male,42000.0,united states,0,,Cuenta en buen estado
+226,53.0,female,10600.0,Britain,1,,Needs follow-up
+109,39.0,male,65100.0,U.S.,0,,Needs follow-up
+370,56.0,male,48700.0,USA,1,,Cuenta en buen estado
+7,,male,31800.0,U.S.A,1,,El cliente solicitó un reembolso
+199,54.0,male,60200.0,UK,0,,Compte fermé
+452,,male,36400.0,United States,0,,Cliente VIP
+218,57.0,female,16900.0,U.S.A,0,,Good standing account
+25,55.0,male,13600.0,united states,0,,Needs follow-up
+61,29.0,male,33600.0,Britain,0,,Nouveau compte
+390,56.0,male,50700.0,u.k.,0,,New registration
+375,34.0,male,19900.0,United Kingdom,0,,Cliente VIP
+34,28.0,female,22900.0,U.S.,0,,Cliente VIP
+401,18.0,male,15100.0,Canada,0,,Nouveau compte
+324,47.0,male,50600.0,us,0,,Flagged for review
+311,,male,29300.0,united states,0,,Customer requested a refund
+266,28.0,male,27100.0,canada,1,,New registration
+10,45.0,male,78700.0,United Kingdom,0,,Good standing account
+285,64.0,male,46800.0,USA,0,,El cliente solicitó un reembolso
+176,51.0,male,52000.0,Canada,0,,Compte fermé
+88,67.0,male,19200.0,United States,0,,Cliente VIP
+11,46.0,female,71100.0,us,0,,Nouveau compte
+393,33.0,male,63500.0,Canada,0,,Le client a demandé un remboursement
+300,44.0,male,18000.0,CAN,0,,Flagged for review
+322,45.0,male,70200.0,USA,0,,VIP customer
+271,66.0,female,60300.0,USA,1,,Flagged for review
+130,52.0,male,218500.0,United States,0,,El cliente solicitó un reembolso
+301,46.0,male,128500.0,canada,0,,Necesita seguimiento
+57,49.0,male,174300.0,UK,0,,Le client a demandé un remboursement
+2,24.0,male,259400.0,Canada,0,,Le client a demandé un remboursement
+297,,male,80000.0,united states,0,,Compte fermé
+145,44.0,female,10700.0,UK,0,,El cliente solicitó un reembolso
+66,46.0,female,29400.0,USA,0,,VIP customer
+454,30.0,male,35600.0,UK,0,,Good standing account
+453,,male,36400.0,UK,0,,Cliente VIP
+265,30.0,male,89900.0,U.S.,0,,El cliente solicitó un reembolso
+445,32.0,male,14300.0,USA,0,,Account closed
+33,21.0,male,59300.0,Britain,0,,Le client a demandé un remboursement
+348,57.0,male,36300.0,U.S.A,0,,Flagged for review
+361,32.0,female,7200.0,US,0,,Necesita seguimiento
+249,61.0,male,101800.0,UK,0,,New registration
+19,39.0,male,29600.0,United States,1,,Necesita seguimiento
+403,,male,16500.0,canada,0,,El cliente solicitó un reembolso
+9,49.0,male,77100.0,USA,0,,Bon état du compte
+48,24.0,male,70200.0,CAN,0,,New registration
+39,27.0,female,32100.0,USA,0,,Necesita seguimiento
+100,19.0,male,23800.0,Canada,0,,Needs follow-up
+234,47.0,male,55500.0,united states,0,,Le client a demandé un remboursement
+391,40.0,male,39900.0,U.S.,0,,Necesita seguimiento
+456,64.0,male,19700.0,U.S.A,1,,Account closed
+188,55.0,male,"$6,300",USA,0,,Needs follow-up
+118,60.0,female,47200.0,Canada,0,,Necesita seguimiento
+92,64.0,male,10900.0,USA,0,,Flagged for review
+448,57.0,male,38600.0,United States,0,,Account closed
+283,,male,26500.0,U.S.A,0,,Flagged for review
+125,66.0,male,"$10,600",UK,0,,El cliente solicitó un reembolso
+326,68.0,male,61700.0,united states,0,,Necesita seguimiento
+353,33.0,female,23700.0,United States,0,,Nouveau compte
+436,,male,15400.0,United States,0,,Customer requested a refund
+253,28.0,male,15600.0,United States,0,,Le client a demandé un remboursement
+277,26.0,male,78400.0,U.S.A,0,,Cuenta en buen estado
+70,47.0,male,58200.0,Canada,0,,Le client a demandé un remboursement
+82,,male,29600.0,US,0,,Le client a demandé un remboursement
+200,21.0,female,461900.0,U.S.A,0,,Cliente VIP
+275,,male,21400.0,canada,0,,Needs follow-up
+247,,male,26200.0,US,1,,Nouveau compte
+209,43.0,male,26200.0,USA,0,,Compte fermé
+46,54.0,male,25700.0,U.S.,0,,VIP customer
+441,,female,19700.0,canada,0,,Account closed
+385,26.0,male,28500.0,USA,0,,Bon état du compte
+72,,male,4400.0,USA,0,,Needs follow-up
+419,,male,40300.0,United States,0,,Cuenta en buen estado
+204,56.0,male,22000.0,USA,0,,Account closed
+106,21.0,male,113800.0,canada,0,,Cuenta en buen estado
+366,46.0,female,49800.0,UK,0,,VIP customer
+354,23.0,female,43400.0,USA,1,,Needs follow-up
+164,32.0,male,45800.0,UK,0,,Flagged for review
+162,19.0,male,23400.0,United States,0,,El cliente solicitó un reembolso
+138,62.0,male,56800.0,USA,0,,Nouveau compte
+3,41.0,female,59500.0,USA,0,,Flagged for review
+386,32.0,female,18200.0,us,0,,Account closed
+239,28.0,male,37200.0,united states,0,,El cliente solicitó un reembolso
+457,,male,63500.0,USA,0,,Cliente VIP
+71,34.0,male,24600.0,United States,0,,Flagged for review
+192,20.0,male,23200.0,USA,0,,VIP customer
+135,25.0,male,46100.0,U.S.,0,,Nouveau compte
+134,64.0,male,52600.0,united states,0,,VIP customer
+355,57.0,male,33700.0,United States,0,,Needs follow-up
+195,27.0,male,124200.0,United States,0,,VIP customer
+330,68.0,male,14000.0,US,0,,Cuenta en buen estado
+13,,male,66500.0,U.S.A,0,,VIP customer
+98,,male,39700.0,canada,0,,Cliente VIP
+321,,male,14000.0,us,0,,Bon état du compte
+16,52.0,male,40900.0,Britain,0,,Bon état du compte
+328,24.0,male,83800.0,us,0,,El cliente solicitó un reembolso
+372,40.0,male,32700.0,u.k.,0,,El cliente solicitó un reembolso
+450,53.0,male,"$39,900",United States,0,,Nouveau compte
+99,61.0,male,68600.0,Britain,0,,Necesita seguimiento
+459,234.0,male,32300.0,United States,0,,Good standing account
+392,60.0,male,36200.0,u.k.,0,,Necesita seguimiento
+137,50.0,male,24700.0,United States,0,,Flagged for review
+74,41.0,male,16000.0,United States,0,,Needs follow-up
+312,,female,20300.0,United States,0,,Customer requested a refund
+345,22.0,male,59500.0,United States,0,,Nouveau compte
+20,51.0,female,49600.0,United States,0,,Le client a demandé un remboursement
+122,67.0,female,21500.0,Canada,0,,Cliente VIP
+270,32.0,male,"$29,200",U.S.,0,,Cliente VIP
+378,56.0,male,"$38,800",USA,0,,El cliente solicitó un reembolso
+22,64.0,male,78800.0,USA,0,,Necesita seguimiento
+423,22.0,male,"$19,900",CAN,1,,Cuenta en buen estado
+51,36.0,male,34100.0,canada,1,,Account closed
+282,19.0,male,6800.0,United States,0,,Needs follow-up
+208,37.0,male,26100.0,UK,0,,Good standing account
+36,23.0,male,6400.0,USA,0,vtrffag@hotmail.com,Flagged for review
+250,60.0,male,4300.0,USA,0,,Account closed
+256,33.0,male,35000.0,US,0,,Flagged for review
+201,42.0,female,24300.0,USA,0,,Bon état du compte
+446,,male,25200.0,Canada,0,,Good standing account
+6,37.0,female,12600.0,UK,0,,New registration
+359,46.0,male,"$22,500",USA,0,,Account closed
+255,39.0,male,35300.0,U.S.A,0,,Account closed
+59,27.0,female,66200.0,Canada,0,,Cuenta en buen estado
+350,46.0,male,35200.0,USA,0,,Bon état du compte
+298,36.0,male,43000.0,USA,0,,Compte fermé
+171,37.0,male,20900.0,USA,0,,Compte fermé
+449,33.0,female,33900.0,USA,0,,Cuenta en buen estado
+341,47.0,male,36500.0,USA,0,,Nouveau compte
+462,50.0,male,98300.0,U.S.,0,,Flagged for review
+87,28.0,male,30900.0,UK,0,,Necesita seguimiento
+85,,male,29900.0,USA,0,,New registration
+414,40.0,male,6900.0,US,0,,Customer requested a refund
+97,39.0,female,12400.0,USA,0,,Le client a demandé un remboursement
+55,36.0,male,58600.0,Canada,0,,El cliente solicitó un reembolso
+356,55.0,female,26300.0,CAN,0,,Account closed
+241,24.0,male,36300.0,canada,1,,Compte fermé
+417,26.0,male,147700.0,Canada,0,,El cliente solicitó un reembolso
+284,31.0,male,72000.0,United Kingdom,0,,Le client a demandé un remboursement
+28,49.0,male,71400.0,Britain,0,,Needs follow-up
+29,,male,19300.0,USA,0,,Flagged for review
+76,22.0,male,27700.0,USA,0,,Good standing account
+288,18.0,male,24600.0,USA,0,,Flagged for review
+221,,male,32200.0,USA,0,,Good standing account
+143,48.0,male,58400.0,united states,0,,Necesita seguimiento
+194,57.0,female,44600.0,Britain,0,,Good standing account
+124,34.0,male,36400.0,united states,1,,Le client a demandé un remboursement
+16,52.0,male,69200.0,USA,0,,Customer requested a refund
+435,68.0,female,49200.0,US,0,,VIP customer
+189,59.0,male,15700.0,United Kingdom,0,,VIP customer
+170,45.0,male,53900.0,United Kingdom,0,,Bon état du compte
+283,,male,26500.0,U.S.A,0,,Flagged for review
+304,43.0,male,256800.0,UK,0,,VIP customer
+41,63.0,male,6600.0,United States,0,,Cliente VIP
+383,40.0,male,225300.0,U.S.A,0,,Good standing account
+347,64.0,male,63600.0,USA,0,,Le client a demandé un remboursement
+83,45.0,male,45200.0,United Kingdom,0,,Bon état du compte
+56,48.0,male,14900.0,canada,0,,New registration
+420,65.0,male,"$60,300",U.S.A,0,,Bon état du compte
+319,52.0,male,33300.0,USA,0,,Compte fermé
+343,36.0,male,48600.0,U.S.A,0,,El cliente solicitó un reembolso
+357,23.0,male,59600.0,USA,0,,Necesita seguimiento
+20,58.0,male,33500.0,canada,0,,Necesita seguimiento
+406,53.0,male,152600.0,United States,0,,Nouveau compte
+68,23.0,female,29200.0,U.S.A,1,,Nouveau compte
+269,48.0,male,116200.0,Canada,0,,Bon état du compte
+91,58.0,male,13100.0,USA,1,,El cliente solicitó un reembolso
+369,,female,36700.0,USA,0,,Nouveau compte
+349,,male,81300.0,CAN,0,,Good standing account
+295,58.0,female,49200.0,USA,0,,Nouveau compte
+374,37.0,male,16800.0,U.S.A,0,,Good standing account
+55,56.0,female,27200.0,Canada,0,,Customer requested a refund
+35,58.0,female,24500.0,United States,0,,Bon état du compte
+336,,male,102000.0,united states,0,,Customer requested a refund
+210,66.0,male,14900.0,Canada,0,,Flagged for review
+150,31.0,male,26900.0,United Kingdom,0,,Customer requested a refund
+293,64.0,male,28000.0,USA,0,,Customer requested a refund
+17,22.0,male,14100.0,USA,1,,Nouveau compte
+278,66.0,male,"$34,600",USA,0,,Bon état du compte
+206,59.0,male,"$57,100",United States,0,,Bon état du compte
+332,49.0,female,67500.0,USA,0,,Needs follow-up
+229,62.0,female,31700.0,canada,0,,New registration
+81,42.0,male,26100.0,Canada,0,,Flagged for review
+216,,male,37500.0,USA,1,,Good standing account
+123,67.0,male,5700.0,CAN,0,,Flagged for review
+88,67.0,male,19200.0,United States,0,,Cliente VIP
+132,36.0,male,45400.0,USA,0,,Necesita seguimiento
+166,31.0,male,26700.0,USA,0,,VIP customer
+430,,male,15400.0,USA,0,,Customer requested a refund
+338,48.0,male,39400.0,us,0,,Compte fermé
+45,57.0,male,46600.0,USA,0,,El cliente solicitó un reembolso
+225,52.0,male,27200.0,us,0,,VIP customer
+364,,male,18600.0,Canada,0,,New registration
+306,61.0,female,32400.0,USA,0,,VIP customer
+51,67.0,male,43500.0,USA,0,,New registration
+404,34.0,male,76100.0,USA,0,,Customer requested a refund
+244,25.0,male,17800.0,UK,0,,El cliente solicitó un reembolso
+290,35.0,male,33400.0,USA,0,,Cuenta en buen estado
+219,59.0,male,14500.0,UK,0,,Le client a demandé un remboursement
+302,33.0,male,103000.0,us,0,,New registration
+217,64.0,male,123700.0,USA,0,,New registration
+103,57.0,female,36400.0,Canada,0,,Necesita seguimiento
+105,250.0,male,18300.0,USA,0,,Account closed
+363,43.0,male,47500.0,USA,0,,Le client a demandé un remboursement
+408,64.0,male,18200.0,u.k.,0,,Account closed
+279,57.0,male,75100.0,United Kingdom,0,,Compte fermé
+151,49.0,male,25600.0,CAN,0,,VIP customer
+172,54.0,male,87900.0,USA,0,,Customer requested a refund
+237,52.0,male,8600.0,USA,1,,Good standing account
+146,33.0,male,118600.0,United States,0,,Flagged for review
+254,,female,9700.0,USA,0,,Needs follow-up
+187,39.0,male,33100.0,United Kingdom,0,,Account closed
+214,,female,24700.0,USA,1,,Nouveau compte
+396,58.0,male,132700.0,Britain,0,,Flagged for review
+426,19.0,female,33400.0,USA,0,,Account closed
+373,56.0,male,16600.0,United Kingdom,0,,Nouveau compte
+149,50.0,male,22500.0,CAN,0,,El cliente solicitó un reembolso
+422,,male,27200.0,Canada,0,uytrhrq@gmail.com,New registration
+251,65.0,female,53000.0,United States,0,,Good standing account
