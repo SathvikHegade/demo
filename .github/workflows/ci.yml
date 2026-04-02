@@ -18,13 +18,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r backend/requirements.txt || echo "Requirements failed, bypassing"
-        pip install pytest pytest-cov
-      continue-on-error: true
+        pip install -r backend/requirements.txt
     - name: Run Pytest
       run: |
         pytest tests/
-      continue-on-error: true
 
   frontend-test:
     runs-on: ubuntu-latest
@@ -38,16 +35,13 @@ jobs:
       with:
         node-version: 20
     - name: Install dependencies
-      run: npm install --no-audit --no-fund --legacy-peer-deps
-      continue-on-error: true
+      run: npm ci
     - name: Try building React
       run: npm run build
-      continue-on-error: true
 
   docker-build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Build Docker Compose
-      run: docker-compose build
-      continue-on-error: true
+      run: docker compose build
