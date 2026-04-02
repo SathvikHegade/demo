@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://backend:8000
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - REDIS_URL=redis://redis:6379
+      - MAX_FILE_SIZE_MB=50
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://frontend:5173
+      - ANALYSIS_TIMEOUT_SECONDS=300
+    volumes:
+      - ./uploads:/app/uploads
+      - ./dataforge_analytics:/app/dataforge_analytics
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: celery -A worker worker --loglevel=info
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./uploads:/app/uploads
+      - ./dataforge_analytics:/app/dataforge_analytics
+    depends_on:
+      - redis
+      - backend

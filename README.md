@@ -2,154 +2,167 @@
 
 > Upload any CSV, JSON, or Excel file. Get a comprehensive AI quality report — bias flags, noise maps, duplicate clusters, and Gemini-powered fix recommendations — in under a minute.
 
----
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg) ![React](https://img.shields.io/badge/React-18-blue.svg) ![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg) ![`AI-Powered`](https://img.shields.io/badge/AI-Powered-orange.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## Quick Start
-
-### Prerequisites
-- Python 3.10+
-- Node.js 18+
-- A free Gemini API key → [aistudio.google.com](https://aistudio.google.com/app/apikey)
+![Demo](docs/images/demo.gif)
 
 ---
 
-## Setup & Run
+## Why DataForge?
 
-### 1 · Configure the API key
+Data scientists and machine learning engineers spend up to 80% of their time cleaning and preparing data. This process is manual, tedious, and error-prone. Worse, subtle issues like demographic bias, hidden outliers, and implicit data leakage often go unnoticed until a model fails in production.
 
-```bash
-# Edit backend/.env and paste your key
-GEMINI_API_KEY=your_key_here
+**DataForge** automates this crucial step. We built a robust, scalable platform that not only profiles your data statistically but actively *reads* it using Google's Gemini LLM. It detects problems classic algorithms miss and provides actionable, code-ready recommendations to fix them.
+
+Our tool bridges the gap between raw data and model-ready datasets, ensuring AI models are trained on high-quality, unbiased, and mathematically sound foundations.
+
+---
+
+## Architecture
+
+```ascii
+                                +-------------------+
+                                |  React Dashboard  |
+                                |  (Vite + Tailwind)|
+                                +---------+---------+
+                                          | REST + WebSockets
++-----------------+             +---------v---------+
+| Kaggle / Sheets |  ------->   | FastAPI Backend   | -----> [ Gemini 1.5 Pro API ] (AI Insights)
+| (Integrations)  |             | (DataForge Core)  |
++-----------------+             +---------+---------+
+                                          | Celery / BackgroundTasks
+                                +---------v---------+
+                                | Analytics Engine  |
+                                | (Pandas/Scikit)   |
+                                +-------------------+
+                                 - Profiler
+                                 - Bias Detector
+                                 - Noise Analyzer
+                                 - Quality Scorer
 ```
 
-### 2 · Terminal 1 — Backend
+---
+
+## Features
+
+| Feature | Description |
+|---|---|
+| 📊 **Deep Profiling** | Instant statistical breakdown of missing values, uniqueness, and distributions. |
+| ⚖️ **Bias Detection** | Identifies severe class imbalances and potential demographic skews. |
+| 🗑️ **Noise & Outliers** | Flags anomalous rows, PII leaks, and conflicting labels. |
+| 🤖 **AI Insights** | Gemini analyzes the context of your data and suggests tailored fixes. |
+| 🔌 **External Integrations** | Direct import from Kaggle, Google Sheets, and HuggingFace. |
+| ⚡ **Real-Time Progress** | WebSockets stream updates as large datasets process. |
+| 💻 **CLI Tool** | Full terminal experience for Headless usage and CI/CD pipelines. |
+
+---
+
+## Quick Start (Docker)
+
+The fastest way to get DataForge running is via Docker Compose.
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/your-org/dataforge.git
 cd DataForge
 
-# Create virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+# 2. Configure environment (add your Gemini or Anthropic API key)
+cp .env.example .env
+nano .env # Add GEMINI_API_KEY=your_key_here
 
-# Install dependencies
-pip install -r backend/requirements.txt
-
-# Generate demo dataset
-python sample_data/generate_demo.py
-
-# Start the API
-uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+# 3. Start the stack
+docker-compose up --build
 ```
+> The dashboard will be available at `http://localhost:5173` and the API at `http://localhost:8000`.
 
-Expected output:
-```
-INFO  DataForge API starting up …
-INFO  GEMINI_API_KEY found — AI features enabled.
-INFO  Uvicorn running on http://0.0.0.0:8000
-```
+---
 
-### 3 · Terminal 2 — Frontend
+## Manual Setup
 
+### 1. Backend (FastAPI)
 ```bash
-cd DataForge/frontend
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+### 2. Frontend (React)
+```bash
+cd frontend
 npm install
 npm run dev
 ```
 
-Expected output:
-```
-VITE v5  ready in 400ms
-➜  Local:   http://localhost:5173/
-```
-
-### 4 · Open the app
-
-Navigate to **http://localhost:5173**
-
 ---
 
-## Testing with Demo Data
+## CLI Usage
 
-Use the generated `sample_data/demo_dirty.csv` which contains:
-- **500 rows**, 8 columns
-- 15% missing values in `age`
-- **80/20 gender imbalance**
-- Income values as `"$45,000"` strings (format noise)
-- Mixed country spellings (`USA`, `U.S.A`, `United States`)
-- **90/10 class imbalance** in `score` target column
-- **30 exact duplicate rows**
-- 5 rows with real email PII patterns
-- Mixed English/Spanish/French `notes`
+DataForge includes a standalone CLI tool for automated pipelines.
 
-When uploading, set **Target Column = `score`** for full imbalance analysis.
+```bash
+# Install the CLI tool
+pip install -e cli/
 
----
+# Analyze a local file and output a colorful terminal report
+dataforge analyze data.csv --target-col Income --threshold 0.70
 
-## API Endpoints
+# Save the AI report as JSON
+dataforge analyze data.csv --output json --save report.json
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET`  | `/health` | Health check |
-| `POST` | `/api/analyze` | Upload dataset, returns `job_id` |
-| `GET`  | `/api/report/{job_id}` | Poll for results |
-| `GET`  | `/docs` | Interactive Swagger UI |
+# Perform a quick local profile (No AI, instantly returns stats)
+dataforge profile dataset.csv
 
----
-
-## Project Structure
-
-```
-DataForge/
-├── backend/
-│   ├── main.py                    ← FastAPI entry point
-│   ├── routers/analyze.py         ← POST /api/analyze
-│   ├── routers/report.py          ← GET /api/report/{id}
-│   ├── services/ai_service.py     ← Gemini 2.5 Flash integration
-│   ├── services/bias_detector.py  ← Fairness metrics
-│   ├── services/report_generator.py
-│   ├── dataforge_analytics/       ← Member 2's analytics engine
-│   ├── models/                    ← Pydantic schemas
-│   ├── utils/
-│   ├── requirements.txt
-│   └── .env
-├── frontend/
-│   ├── src/
-│   │   ├── pages/Landing.tsx
-│   │   ├── pages/Dashboard.tsx    ← Main dashboard
-│   │   ├── pages/Report.tsx       ← Printable PDF report
-│   │   ├── services/api.ts        ← All API calls
-│   │   └── store/analysisStore.ts ← Zustand + polling
-│   ├── vite.config.ts             ← /api proxy → :8000
-│   └── package.json
-├── sample_data/
-│   ├── demo_dirty.csv
-│   └── generate_demo.py
-└── README.md
+# Compare two datasets
+dataforge compare dirty.csv cleaned.csv
 ```
 
 ---
 
-## Smoke Test Checklist
+## API Reference
 
-1. `GET http://localhost:8000/health` → `{"status":"ok"}`
-2. `GET http://localhost:8000/docs` → Swagger UI loads
-3. `http://localhost:5173` → Landing page renders
-4. Click **Load Demo** → Dashboard loads with mock data in ~2s
-5. Demo shows quality score ring animating to value
-6. Click all 5 tabs — Overview, Bias, Noise, Imbalance, Duplicates
-7. Upload `sample_data/demo_dirty.csv` with `score` as target column
-8. Progress bar advances through stages
-9. Report completes and shows real Gemini AI summary
-10. Click **Export PDF** → Printable report renders
+Base URL: `http://localhost:8000`
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `/health` | GET | Check system status. |
+| `/api/analyze` | POST | Upload a file (`multipart/form-data`) to start analysis. Returns `job_id`. |
+| `/api/report/{job_id}` | GET | Retrieve the completed analysis report. |
+| `/ws/{job_id}` | WS | Connect for real-time progress updates via WebSockets. |
+| `/api/import/kaggle` | POST | `{ "dataset_id": "user/dataset" }` - Imports from Kaggle. |
+| `/api/import/sheets` | POST | `{ "url": "https://docs..." }` - Imports from Google Sheets. |
+| `/api/import/huggingface`| POST | `{ "dataset_name": "...", "split": "train" }` - Imports from HF. |
 
 ---
 
-## Common Errors & Fixes
+## Integration Details
+* **Kaggle**: Requires `KAGGLE_USERNAME` and `KAGGLE_KEY` in `.env` or `~/.kaggle/kaggle.json`. Downloads the first available CSV in the dataset.
+* **Google Sheets**: Supports public sheet URLs without OAuth by converting Google Sheets links to CSV export endpoints. 
+* **HuggingFace**: Uses `huggingface_hub` to stream in DataFrame splits up to `MAX_FILE_SIZE_MB`.
 
-| Error | Fix |
-|-------|-----|
-| `GEMINI_API_KEY not set` | Add key to `backend/.env` |
-| `ModuleNotFoundError: rapidfuzz` | Run `pip install -r backend/requirements.txt` again |
-| `CORS error in browser` | Ensure backend running on port 8000, frontend on 5173 |
-| `Port 8000 already in use` | `lsof -ti:8000 \| xargs kill` (Mac/Linux) or restart terminal |
-| `npm ERR! peer dep` | Use Node 18+ and run `npm install --legacy-peer-deps` |
+---
+
+## Tech Stack
+
+| Domain | Technology |
+|---|---|
+| **Frontend** | React 18, Vite, TailwindCSS, Chart.js / Recharts |
+| **Backend** | Python 3.11, FastAPI, WebSockets |
+| **Analytics Engine** | Pandas, Numpy, Scikit-learn |
+| **AI Integration** | Google Gemini 1.5 API |
+| **DevOps** | Docker, Docker Compose, GitHub Actions CI/CD |
+| **CLI** | Click, Rich |
+
+---
+
+## Hackathon Submission
+
+This project was built for the [Hackathon Name].
+* **Team:** [Your Team Name]
+* **Problem Addressed:** The lack of automated, actionable data quality tooling for AI engineering.
+* **Key Achievements:** Full-stack integration, real-time WebSocket progress bars, generic integration connectors, and an elegant UI/UX.
+
+---
+
+## License
+MIT License. See [LICENSE](LICENSE) for more details.
