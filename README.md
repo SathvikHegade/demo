@@ -1,168 +1,242 @@
-# ⬡ DataForge — AI-Powered Dataset Quality Analyzer
+# ⬡ DataForge: AI-Powered Dataset Quality Analyzer
 
-> Upload any CSV, JSON, or Excel file. Get a comprehensive AI quality report — bias flags, noise maps, duplicate clusters, and Gemini-powered fix recommendations — in under a minute.
+## 📋 Project Submission
 
-![Python](https://img.shields.io/badge/Python-3.11+-blue.svg) ![React](https://img.shields.io/badge/React-18-blue.svg) ![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg) ![`AI-Powered`](https://img.shields.io/badge/AI-Powered-orange.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
-
-![Demo](docs/images/demo.gif)
-
----
-
-## Why DataForge?
-
-Data scientists and machine learning engineers spend up to 80% of their time cleaning and preparing data. This process is manual, tedious, and error-prone. Worse, subtle issues like demographic bias, hidden outliers, and implicit data leakage often go unnoticed until a model fails in production.
-
-**DataForge** automates this crucial step. We built a robust, scalable platform that not only profiles your data statistically but actively *reads* it using Google's Gemini LLM. It detects problems classic algorithms miss and provides actionable, code-ready recommendations to fix them.
-
-Our tool bridges the gap between raw data and model-ready datasets, ensuring AI models are trained on high-quality, unbiased, and mathematically sound foundations.
+**Project Name**: DataForge - AI-Powered Dataset Quality Analyzer  
+**Team Name**: TATVAMASI<br>
+**Team Members**: Kushal V Achar, Hemant Saralaya, Ranganath J, T S Sathvik Hegade<br>
+**Track**: Advanced Track  
 
 ---
 
-## Architecture
+## 🚀 Project Overview
 
-```ascii
-                                +-------------------+
-                                |  React Dashboard  |
-                                |  (Vite + Tailwind)|
-                                +---------+---------+
-                                          | REST + WebSockets
-+-----------------+             +---------v---------+
-| Kaggle / Sheets |  ------->   | FastAPI Backend   | -----> [ Gemini 1.5 Pro API ] (AI Insights)
-| (Integrations)  |             | (DataForge Core)  |
-+-----------------+             +---------+---------+
-                                          | Celery / BackgroundTasks
-                                +---------v---------+
-                                | Analytics Engine  |
-                                | (Pandas/Scikit)   |
-                                +-------------------+
-                                 - Profiler
-                                 - Bias Detector
-                                 - Noise Analyzer
-                                 - Quality Scorer
+**Problem Statement:**  
+Data scientists spend up to 80% of their time cleaning and preparing datasets. Manual data quality checks are tedious, error-prone, and often miss subtle issues like demographic bias, hidden outliers, PII leaks, and data leakage that can cause models to fail in production.
+
+**Our Solution:**  
+DataForge is an end-to-end platform that automates dataset quality analysis using a combination of statistical algorithms and AI-powered insights. It provides:
+- **Automated quality scoring** across multiple dimensions (completeness, consistency, validity, uniqueness)
+- **Intelligent bias detection** identifying class imbalances and demographic skews
+- **Noise & outlier flagging** with PII leak detection
+- **AI-generated recommendations** using Google Gemini to provide actionable, context-aware fixes
+- **Multi-source integrations** supporting Kaggle, Google Sheets, and HuggingFace datasets
+- **Real-time progress tracking** via WebSockets for large file processing
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────┐
+│  React Dashboard    │
+│  (Vite + Tailwind)  │
+│  Port: 5173         │
+└──────────┬──────────┘
+           │ REST API + WebSockets
+           │
+┌──────────▼──────────┐      ┌──────────────────┐
+│  FastAPI Backend    │◄────►│  Gemini AI API   │
+│  (Python 3.11)      │      │  (AI Insights)   │
+│  Port: 8000         │      └──────────────────┘
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────────────────────────┐
+│     DataForge Analytics Engine          │
+│  ┌──────────────────────────────────┐   │
+│  │ • Statistical Profiler           │   │
+│  │ • Bias & Imbalance Detector      │   │
+│  │ • Noise & Outlier Analyzer       │   │
+│  │ • Duplicate Detection (MinHash)  │   │
+│  │ • Quality Scorer                 │   │
+│  └──────────────────────────────────┘   │
+└─────────────────────────────────────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  External Sources   │
+│  • Kaggle           │
+│  • Google Sheets    │
+│  • HuggingFace      │
+└─────────────────────┘
 ```
 
----
+**Key Components:**
+- **Frontend**: React 18 with Vite, TailwindCSS for responsive UI, Recharts for data visualization
+- **Backend**: FastAPI with async support, WebSocket for real-time updates
+- **Analytics**: Pandas, NumPy, Scikit-learn for statistical analysis
+- **AI Integration**: Google Gemini 2.5 flash for context-aware recommendations
+- **CLI Tool**: Click + Rich for terminal-based usage
 
-## Features
 
-| Feature | Description |
-|---|---|
-| 📊 **Deep Profiling** | Instant statistical breakdown of missing values, uniqueness, and distributions. |
-| ⚖️ **Bias Detection** | Identifies severe class imbalances and potential demographic skews. |
-| 🗑️ **Noise & Outliers** | Flags anomalous rows, PII leaks, and conflicting labels. |
-| 🤖 **AI Insights** | Gemini analyzes the context of your data and suggests tailored fixes. |
-| 🔌 **External Integrations** | Direct import from Kaggle, Google Sheets, and HuggingFace. |
-| ⚡ **Real-Time Progress** | WebSockets stream updates as large datasets process. |
-| 💻 **CLI Tool** | Full terminal experience for Headless usage and CI/CD pipelines. |
 
----
+## 🛠️ How to Run Locally
 
-## Quick Start (Docker)
-
-The fastest way to get DataForge running is via Docker Compose.
+### Option 1: Docker Compose (Recommended)
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-org/dataforge.git
+git clone <your-repo-url>
 cd DataForge
 
-# 2. Configure environment (add your Gemini or Anthropic API key)
+# 2. Set up environment variables
 cp .env.example .env
-nano .env # Add GEMINI_API_KEY=your_key_here
+# Edit .env and add your GEMINI_API_KEY
 
-# 3. Start the stack
+# 3. Start all services
 docker-compose up --build
+
+# Access the application:
+# - Frontend: http://localhost:5173
+# - Backend API: http://localhost:8000
+# - API Docs: http://localhost:8000/docs
 ```
-> The dashboard will be available at `http://localhost:5173` and the API at `http://localhost:8000`.
 
----
+### Option 2: Manual Setup
 
-## Manual Setup
-
-### 1. Backend (FastAPI)
+#### Backend Setup
 ```bash
 cd backend
-python -m venv .venv
-source .venv/bin/activate
+python -m venv venv
+source venv/Scripts/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
+
+# Set environment variable
+export GEMINI_API_KEY=your_key_here  # Windows: set GEMINI_API_KEY=your_key_here
+
+# Run the server
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
-### 2. Frontend (React)
+
+#### Frontend Setup
 ```bash
 cd frontend
 npm install
 npm run dev
+# Access at http://localhost:5173
 ```
 
----
-
-## CLI Usage
-
-DataForge includes a standalone CLI tool for automated pipelines.
-
+#### CLI Tool Setup
 ```bash
-# Install the CLI tool
 pip install -e cli/
 
-# Analyze a local file and output a colorful terminal report
-dataforge analyze data.csv --target-col Income --threshold 0.70
+# Analyze a dataset
+dataforge analyze sample_data/demo_dirty.csv --target-col Income --threshold 0.70
 
-# Save the AI report as JSON
-dataforge analyze data.csv --output json --save report.json
-
-# Perform a quick local profile (No AI, instantly returns stats)
-dataforge profile dataset.csv
-
-# Compare two datasets
-dataforge compare dirty.csv cleaned.csv
+# Quick profile (no AI)
+dataforge profile sample_data/demo_dirty.csv
 ```
 
 ---
 
-## API Reference
+## 🎯 Features Implemented
 
-Base URL: `http://localhost:8000`
+### Core Features
+- ✅ **Multi-format Support**: CSV, JSON, Excel (XLSX)
+- ✅ **Statistical Profiling**: Missing values, data types, distributions, correlations
+- ✅ **Quality Scoring**: Multi-dimensional quality metrics (0-100 scale)
+- ✅ **Bias Detection**: Class imbalance, demographic skew identification
+- ✅ **Duplicate Detection**: MinHash LSH algorithm for near-duplicate rows
+- ✅ **Noise Analysis**: Outlier detection, PII leak scanning
+- ✅ **AI Recommendations**: Context-aware fixes via Gemini AI
 
-| Endpoint | Method | Description |
-|---|---|---|
-| `/health` | GET | Check system status. |
-| `/api/analyze` | POST | Upload a file (`multipart/form-data`) to start analysis. Returns `job_id`. |
-| `/api/report/{job_id}` | GET | Retrieve the completed analysis report. |
-| `/ws/{job_id}` | WS | Connect for real-time progress updates via WebSockets. |
-| `/api/import/kaggle` | POST | `{ "dataset_id": "user/dataset" }` - Imports from Kaggle. |
-| `/api/import/sheets` | POST | `{ "url": "https://docs..." }` - Imports from Google Sheets. |
-| `/api/import/huggingface`| POST | `{ "dataset_name": "...", "split": "train" }` - Imports from HF. |
+### Integrations
+- ✅ **Kaggle**: Direct dataset import via dataset ID
+- ✅ **Google Sheets**: Public sheet URL import
+- ✅ **HuggingFace**: Dataset streaming from HF Hub
 
----
-
-## Integration Details
-* **Kaggle**: Requires `KAGGLE_USERNAME` and `KAGGLE_KEY` in `.env` or `~/.kaggle/kaggle.json`. Downloads the first available CSV in the dataset.
-* **Google Sheets**: Supports public sheet URLs without OAuth by converting Google Sheets links to CSV export endpoints. 
-* **HuggingFace**: Uses `huggingface_hub` to stream in DataFrame splits up to `MAX_FILE_SIZE_MB`.
-
----
-
-## Tech Stack
-
-| Domain | Technology |
-|---|---|
-| **Frontend** | React 18, Vite, TailwindCSS, Chart.js / Recharts |
-| **Backend** | Python 3.11, FastAPI, WebSockets |
-| **Analytics Engine** | Pandas, Numpy, Scikit-learn |
-| **AI Integration** | Google Gemini 1.5 API |
-| **DevOps** | Docker, Docker Compose, GitHub Actions CI/CD |
-| **CLI** | Click, Rich |
+### Advanced Features
+- ✅ **Real-time Updates**: WebSocket-based progress streaming
+- ✅ **CLI Tool**: Full terminal interface for CI/CD pipelines
+- ✅ **API Documentation**: Auto-generated OpenAPI/Swagger docs
+- ✅ **Error Handling**: Graceful failures with detailed error messages
 
 ---
 
-## Hackathon Submission
+## 📚 API Reference
 
-This project was built for the [Hackathon Name].
-* **Team:** [Your Team Name]
-* **Problem Addressed:** The lack of automated, actionable data quality tooling for AI engineering.
-* **Key Achievements:** Full-stack integration, real-time WebSocket progress bars, generic integration connectors, and an elegant UI/UX.
+**Base URL**: `http://localhost:8000`
+
+### Core Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | System health check |
+| POST | `/api/analyze` | Upload file and start analysis (returns `job_id`) |
+| GET | `/api/report/{job_id}` | Retrieve completed analysis report |
+| WS | `/ws/{job_id}` | Real-time progress updates |
+
+### Integration Endpoints
+
+| Method | Endpoint | Body | Description |
+|--------|----------|------|-------------|
+| POST | `/api/import/kaggle` | `{"dataset_id": "username/dataset"}` | Import from Kaggle |
+| POST | `/api/import/sheets` | `{"url": "https://docs.google..."}` | Import from Google Sheets |
+| POST | `/api/import/huggingface` | `{"dataset_name": "...", "split": "train"}` | Import from HuggingFace |
+
+**Example Request:**
+```bash
+curl -X POST http://localhost:8000/api/analyze \
+  -F "file=@data.csv" \
+  -F "target_column=income" \
+  -F "quality_threshold=0.7"
+```
 
 ---
 
-## License
-MIT License. See [LICENSE](LICENSE) for more details.
+## 🧪 Testing
+
+```bash
+# Run backend tests
+cd backend
+pytest tests/
+
+# Test API endpoints
+python tests/test_api.py
+```
+
+---
+
+## 🔧 Environment Variables
+
+Required in `.env` file:
+
+```bash
+# AI Configuration (Required for AI features)
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Optional Configurations
+MAX_FILE_SIZE_MB=50
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+ANALYSIS_TIMEOUT_SECONDS=300
+
+# Optional: For Kaggle Integration
+KAGGLE_USERNAME=your_kaggle_username
+KAGGLE_KEY=your_kaggle_api_key
+```
+
+---
+
+## 📦 Tech Stack
+
+| Layer | Technologies |
+|-------|-------------|
+| **Frontend** | React 18, Vite, TailwindCSS, Recharts, Framer Motion, Zustand |
+| **Backend** | Python 3.11, FastAPI, WebSockets, Uvicorn |
+| **Analytics** | Pandas, NumPy, Scikit-learn, SciPy |
+| **AI/ML** | Google Gemini 2.5 Flash API |
+| **Data Processing** | RapidFuzz (string matching), DataSketch (MinHash), OpenPyXL (Excel) |
+| **DevOps** | Docker, Docker Compose, GitHub Actions |
+| **CLI** | Click, Rich (terminal UI) |
+
+---
+
+## 🚀 Deployment
+
+The application is production-ready with Docker support and can be deployed to:
+- **Render** (Backend + Frontend)
+- **Vercel** (Frontend only)
+
+See deployment instructions below in the submission guide.
+
