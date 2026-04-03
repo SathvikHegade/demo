@@ -243,7 +243,16 @@ export const Dashboard = () => {
             {/* ── BIAS ── */}
             {activeTab === 'Bias' && (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-                <Card><SectionTitle accent="#9b59f5">Fairness Radar</SectionTitle><BiasRadar /></Card>
+                <Card>
+                  <SectionTitle accent="#9b59f5">Fairness Radar</SectionTitle>
+                  <div style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a', letterSpacing: '0.1em', marginBottom: 12 }}>
+                    CLICK ANY AXIS LABEL TO LEARN WHAT IT MEASURES
+                  </div>
+                  <BiasRadar
+                    biasDetails={r.bias_report.details}
+                    fairnessMetrics={r.bias_report.fairness_metrics}
+                  />
+                </Card>
                 <Card><SectionTitle accent="#f5a623">Column Correlations</SectionTitle><CorrelationHeatmap /></Card>
                 <div style={{ gridColumn: '1 / -1' }}>
                   <Card>
@@ -275,7 +284,13 @@ export const Dashboard = () => {
                   </Card>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  <Card><SectionTitle>Outlier Distribution (IQR)</SectionTitle><OutlierBoxPlot /></Card>
+                  <Card>
+                    <SectionTitle>Outlier Distribution</SectionTitle>
+                    <div style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a', letterSpacing: '0.1em', marginBottom: 4 }}>
+                      IQR METHOD — VALUES OUTSIDE 1.5× INTERQUARTILE RANGE
+                    </div>
+                    <OutlierBoxPlot outlierDetails={r.noise_report.outlier_details} />
+                  </Card>
                   <Card>
                     <SectionTitle accent="#ff3b5c">Noise Issues</SectionTitle>
                     {r.issues.filter(i => i.category === 'noise').map(i => (
@@ -338,7 +353,11 @@ export const Dashboard = () => {
                       { label: 'Balanced', value: r.imbalance_report.is_imbalanced ? 'No' : 'Yes', color: r.imbalance_report.is_imbalanced ? '#ff3b5c' : '#00d97e' },
                     ].map(s => <Stat key={s.label} label={s.label} value={s.value} color={s.color} />)}
                   </div>
-                  <ImbalanceBar />
+                  <ImbalanceBar
+                      classDistribution={r.imbalance_report.class_distribution}
+                      imbalanceRatio={r.imbalance_report.imbalance_ratio}
+                      targetColumn={r.imbalance_report.target_column}
+                    />
                 </Card>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <AIInsightCard title="Rebalancing Strategy" text={r.imbalance_report.recommended_strategy} />

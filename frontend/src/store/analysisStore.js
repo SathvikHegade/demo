@@ -155,6 +155,20 @@ export const useAnalysisStore = create((set, get) => ({
     }, 2000);
   },
 
+  // Called after a successful import (sheets/kaggle/hf) that returns a job_id
+  startImportJob: (jobId, label = 'Imported Dataset') => {
+    set({
+      currentJobId: jobId,
+      datasetName: label,
+      status: 'analyzing',
+      progress: 0.05,
+      stage: 'Queued',
+      results: null,
+      errorMessage: null,
+    });
+    get().pollJob(jobId);
+  },
+
   reset: () =>
     set({
       currentJobId: null,

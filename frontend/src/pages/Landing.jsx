@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAnalysisStore } from '../store/analysisStore';
+import { importFromKaggle, importFromSheets, importFromHuggingFace } from '../services/api';
 
 const FEATURES = [
   { icon: '⚖', label: 'Bias Detection', desc: 'Demographic + proxy fairness metrics' },
@@ -8,6 +9,18 @@ const FEATURES = [
   { icon: '⧉', label: 'Duplicate Scan', desc: 'Exact & near-duplicate row clustering' },
   { icon: '⚡', label: 'AI Narratives', desc: 'Gemini-powered issue recommendations' },
 ];
+
+const Spinner = () => (
+  <span style={{
+    display: 'inline-block', width: 14, height: 14,
+    border: '2px solid rgba(255,107,43,0.2)',
+    borderTop: '2px solid #ff6b2b',
+    borderRadius: '50%',
+    animation: 'spin 0.7s linear infinite',
+    verticalAlign: 'middle',
+    marginRight: 6,
+  }} />
+);
 
 export const Landing = () => {
   const [dragging, setDragging] = useState(false);
@@ -17,6 +30,14 @@ export const Landing = () => {
   const fileRef = useRef(null);
   const navigate = useNavigate();
   const { uploadFile, loadMockData } = useAnalysisStore();
+
+  // Import panel state
+  const [importTab, setImportTab] = useState('kaggle');
+  const [importInput, setImportInput] = useState('');
+  const [importStatus, setImportStatus] = useState(null);
+  const [importMessage, setImportMessage] = useState('');
+  const [hfSplit, setHfSplit] = useState('train');
+  const [hfMaxRows, setHfMaxRows] = useState(10000);
 
   const handleFile = useCallback(async (file) => {
     const config = { target_column: targetColumn.trim() || null, bias_threshold: 1 - biasTolerance / 100 };
@@ -31,8 +52,72 @@ export const Landing = () => {
 
   const onDemo = () => { loadMockData(); navigate('/dashboard/demo'); };
 
+  const handleTabChange = (tab) => {
+    setImportTab(tab);
+    setImportInput('');
+    setImportStatus(null);
+    setImportMessage('');
+  };
+
+  const handleImport = async () => {
+    if (!importInput.trim()) return;
+    setImportStatus('loading');
+    setImportMessage('');
+    try {
+      let result;
+      if (importTab === 'kaggle') {
+        result = await importFromKaggle(importInput.trim());
+      } else if (importTab === 'sheets') {
+        result = await importFromSheets(importInput.trim());
+      } else {
+        result = await importFromHuggingFace(importInput.trim(), hfSplit, hfMaxRows);
+      }
+
+      // If backend returned a job_id, pipe straight into the analysis dashboard
+      if (result.job_id) {
+        const label = importTab === 'kaggle'
+          ? importInput.trim()
+          : importTab === 'sheets'
+          ? 'Sheets Import'
+          : importInput.trim();
+        useAnalysisStore.getState().startImportJob(result.job_id, label);
+        navigate('/dashboard/live');
+        return;
+      }
+
+      // Fallback: no pipeline yet — just show counts
+      setImportStatus('success');
+      setImportMessage(
+        `Connected! Found ${result.rows?.toLocaleString() ?? '?'} rows, ` +
+        `${result.columns?.length ?? '?'} columns. ` +
+        `Note: Full analysis pipeline coming soon — use file upload for complete analysis.`
+      );
+    } catch (err) {
+      setImportStatus('error');
+      setImportMessage(err.message);
+    }
+  };
+
+  const inputStyle = {
+    width: '100%', boxSizing: 'border-box',
+    background: 'rgba(255,255,255,0.03)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    borderRadius: 6, padding: '8px 12px',
+    color: '#f0f0f8', fontFamily: 'Space Mono, monospace',
+    fontSize: 12, outline: 'none',
+  };
+
+  const importBtnStyle = {
+    fontFamily: 'Space Mono, monospace', fontSize: 11, fontWeight: 700,
+    letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ff6b2b',
+    border: '1px solid rgba(255,107,43,0.35)', borderRadius: 8,
+    padding: '9px 22px', background: 'rgba(255,107,43,0.08)',
+    cursor: 'pointer', transition: 'all 0.2s', marginTop: 10,
+  };
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', position: 'relative' }}>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
 
       {/* Ambient orbs */}
       <div style={{ position: 'fixed', top: -200, left: -200, width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,107,43,0.06) 0%, transparent 65%)', pointerEvents: 'none', zIndex: 0 }} />
@@ -176,6 +261,138 @@ export const Landing = () => {
               <div style={{ fontFamily: 'Syne, Cascadia Code', fontWeight: 600, fontSize: 14, color: '#f0f0f8' }}>{d.label}</div>
             </button>
           ))}
+        </div>
+
+        {/* Import from external source */}
+        <div className="animate-fade-up stagger-6" style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
+          <span style={{ fontFamily: 'Space Mono, monospace', fontSize: 10, color: '#5a5a7a', letterSpacing: '0.1em', whiteSpace: 'nowrap' }}>IMPORT FROM EXTERNAL SOURCE</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
+        </div>
+
+        <div className="animate-fade-up stagger-6" style={{ marginTop: 16 }}>
+          <div style={{
+            background: 'rgba(8,8,16,0.8)',
+            border: '1px solid rgba(255,255,255,0.07)',
+            borderRadius: 10,
+            padding: 20,
+          }}>
+            {/* Tab switcher */}
+            <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid rgba(255,255,255,0.06)', marginBottom: 16 }}>
+              {['kaggle', 'sheets', 'huggingface'].map(tab => (
+                <button key={tab} onClick={() => handleTabChange(tab)} style={{
+                  fontFamily: 'Space Mono, monospace', fontSize: 10, textTransform: 'uppercase',
+                  letterSpacing: '0.1em', background: 'none', border: 'none', cursor: 'pointer',
+                  padding: '8px 14px',
+                  color: importTab === tab ? '#f0f0f8' : '#5a5a7a',
+                  borderBottom: importTab === tab ? '1.5px solid #ff6b2b' : '1.5px solid transparent',
+                  marginBottom: -1,
+                  transition: 'color 0.15s',
+                }}>
+                  {tab === 'kaggle' ? 'Kaggle' : tab === 'sheets' ? 'Google Sheets' : 'HuggingFace'}
+                </button>
+              ))}
+            </div>
+
+            {/* Kaggle tab */}
+            {importTab === 'kaggle' && (
+              <div>
+                <label style={{ fontFamily: 'Space Mono, monospace', fontSize: 10, color: '#5a5a7a', letterSpacing: '0.1em', display: 'block', marginBottom: 8 }}>KAGGLE DATASET ID</label>
+                <input
+                  type="text"
+                  placeholder="e.g. titanic/titanic  or  datasnaek/youtube-new"
+                  value={importInput}
+                  onChange={e => setImportInput(e.target.value)}
+                  style={inputStyle}
+                />
+                <div style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a', marginTop: 5 }}>
+                  Format: username/dataset-name — find on kaggle.com/datasets
+                </div>
+              </div>
+            )}
+
+            {/* Sheets tab */}
+            {importTab === 'sheets' && (
+              <div>
+                <label style={{ fontFamily: 'Space Mono, monospace', fontSize: 10, color: '#5a5a7a', letterSpacing: '0.1em', display: 'block', marginBottom: 8 }}>GOOGLE SHEETS URL</label>
+                <input
+                  type="text"
+                  placeholder="https://docs.google.com/spreadsheets/d/..."
+                  value={importInput}
+                  onChange={e => setImportInput(e.target.value)}
+                  style={inputStyle}
+                />
+                <div style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a', marginTop: 5 }}>
+                  Sheet must be publicly accessible (File → Share → Anyone with link)
+                </div>
+              </div>
+            )}
+
+            {/* HuggingFace tab */}
+            {importTab === 'huggingface' && (
+              <div>
+                <label style={{ fontFamily: 'Space Mono, monospace', fontSize: 10, color: '#5a5a7a', letterSpacing: '0.1em', display: 'block', marginBottom: 8 }}>HUGGINGFACE DATASET NAME</label>
+                <input
+                  type="text"
+                  placeholder="e.g. imdb  or  csv  or  wikitext"
+                  value={importInput}
+                  onChange={e => setImportInput(e.target.value)}
+                  style={inputStyle}
+                />
+                <div style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a', marginTop: 5 }}>
+                  Dataset name from huggingface.co/datasets
+                </div>
+                <div style={{ display: 'flex', gap: 14, marginTop: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a', letterSpacing: '0.08em' }}>SPLIT:</span>
+                    {['train', 'test', 'validation'].map(s => (
+                      <button key={s} onClick={() => setHfSplit(s)} style={{
+                        fontFamily: 'Space Mono, monospace', fontSize: 9, padding: '3px 10px',
+                        borderRadius: 99, cursor: 'pointer', transition: 'all 0.15s',
+                        background: hfSplit === s ? 'rgba(255,107,43,0.15)' : 'rgba(255,255,255,0.04)',
+                        border: hfSplit === s ? '1px solid rgba(255,107,43,0.4)' : '1px solid rgba(255,255,255,0.08)',
+                        color: hfSplit === s ? '#ff6b2b' : '#5a5a7a',
+                      }}>{s}</button>
+                    ))}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ fontFamily: 'Space Mono, monospace', fontSize: 9, color: '#5a5a7a', letterSpacing: '0.08em' }}>MAX ROWS:</span>
+                    <input
+                      type="number"
+                      value={hfMaxRows}
+                      onChange={e => setHfMaxRows(Number(e.target.value))}
+                      style={{ ...inputStyle, width: 90, padding: '4px 8px', fontSize: 11 }}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Import button */}
+            <button
+              onClick={handleImport}
+              disabled={importStatus === 'loading'}
+              style={{ ...importBtnStyle, opacity: importStatus === 'loading' ? 0.7 : 1 }}
+              onMouseEnter={e => { if (importStatus !== 'loading') e.currentTarget.style.background = 'rgba(255,107,43,0.16)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,107,43,0.08)'; }}
+            >
+              {importStatus === 'loading' ? <><Spinner />Connecting...</> : 'Import Dataset'}
+            </button>
+
+            {/* Status display */}
+            {importStatus === 'success' && (
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 10 }}>
+                <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#00d97e', marginTop: 3, flexShrink: 0 }} />
+                <span style={{ fontFamily: 'Inter, Cascadia Code', fontSize: 12, color: '#00d97e', lineHeight: 1.6 }}>{importMessage}</span>
+              </div>
+            )}
+            {importStatus === 'error' && (
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 10 }}>
+                <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#ff3b5c', marginTop: 3, flexShrink: 0 }} />
+                <span style={{ fontFamily: 'Inter, Cascadia Code', fontSize: 12, color: '#ff3b5c', lineHeight: 1.6 }}>{importMessage}</span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Feature strip */}

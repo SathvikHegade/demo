@@ -24,6 +24,7 @@ load_dotenv(dotenv_path=_backend_dir / ".env")
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import analyze, health, report
+from integrations import kaggle_connector, sheets_connector, hf_connector
 
 logging.basicConfig(
     level=logging.INFO,
@@ -71,6 +72,9 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(analyze.router)
 app.include_router(report.router)
+app.include_router(kaggle_connector.router)
+app.include_router(sheets_connector.router)
+app.include_router(hf_connector.router)
 
 
 @app.get("/", include_in_schema=False)
