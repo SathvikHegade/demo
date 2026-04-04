@@ -1,0 +1,12 @@
+import fs from 'fs';
+let C = fs.readFileSync('components/DemoDashboard_src.txt', 'utf8');
+C = C.replace(/import \{ useNavigate \} from 'react-router-dom';/, '');
+C = C.replace(/import \{ useAnalysisStore \} from '\.\.\/store\/analysisStore';/, "import { mapReportToDemoFormat } from '../utils/mapReport';");
+C = C.replace(/export const Dashboard = \(\) => \{/g, "export const DemoDashboard = ({ report }: {report: any}) => {");
+C = C.replace(/const \{ results, status, datasetName, progress, stage, errorMessage, currentJobId, reset \} = useAnalysisStore\(\);/, "const results = mapReportToDemoFormat(report);\n  const status = 'complete';\n  const datasetName = 'Analyzed Dataset';\n  const reset = () => {};\n  const errorMessage = 'Error';\n");
+C = C.replace(/const navigate = useNavigate\(\);/g, '');
+C = C.replace(/useEffect\(\(\) => \{ if \(status === 'idle'\) navigate\('\/'\); \}, \[status, navigate\]\);/, '');
+C = C.replace(/reset\(\); navigate\('\/'\);/g, "console.log('reset');");
+C = C.replace(/'\.\.\/components\/charts\//g, "./charts/");
+C = C.replace(/'\.\.\/components\/ui\//g, "./ui/");
+fs.writeFileSync('components/DemoDashboard.tsx', C, 'utf8');

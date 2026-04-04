@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+pydantic
+python-multipart
+typer
+jinja2
+rapidfuzz
+google-generativeai
+kaggle>=1.6.17
+datasets
