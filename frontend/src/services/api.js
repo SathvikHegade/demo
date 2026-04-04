@@ -81,3 +81,37 @@ export async function importFromHuggingFace(datasetName, split = 'train', maxRow
   }
   return res.json();
 }
+
+// ── Data Cleaning API ────────────────────────────────────────────────────────
+
+/** POST /api/clean — start a cleaning job */
+export async function startCleaning(file, config = {}) {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('config', JSON.stringify(config));
+
+  const res = await fetch(`${API_BASE}/api/clean`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new Error(err.detail || `Cleaning upload failed: ${res.status}`);
+  }
+  return res.json();
+}
+
+/** GET /api/clean/status/{jobId} — poll for cleaning results */
+export async function getCleaningStatus(jobId) {
+  const res = await fetch(`${API_BASE}/api/clean/status/${jobId}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new Error(err.detail || `Status fetch failed: ${res.status}`);
+  }
+  return res.json();
+}
+
+/** Returns the download URL for a cleaned CSV */
+export function getCleaningDownloadUrl(token) {
+  return `${API_BASE}/api/clean/download/${token}`;
+}

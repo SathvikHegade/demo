@@ -3,6 +3,7 @@ dataset_loader.py — async-safe CSV / JSON / Excel ingestion with size guard.
 """
 from __future__ import annotations
 
+import asyncio
 import io
 import os
 from pathlib import Path
@@ -55,15 +56,15 @@ async def load_dataset(file_path: str) -> Tuple[pd.DataFrame, float]:
     buf = io.BytesIO(raw)
 
     if suffix == ".csv":
-        df = pd.read_csv(buf, low_memory=False)
+        df = await asyncio.to_thread(pd.read_csv, buf, low_memory=False)
     elif suffix == ".json":
         try:
-            df = pd.read_json(buf, orient="records")
+            df = await asyncio.to_thread(pd.read_json, buf, orient="records")
         except Exception:
             buf.seek(0)
-            df = pd.read_json(buf, lines=True)
+            df = await asyncio.to_thread(pd.read_json, buf, lines=True)
     elif suffix in (".xlsx", ".xls"):
-        df = pd.read_excel(buf, engine="openpyxl")
+        df = await asyncio.to_thread(pd.read_excel, buf, engine="openpyxl")
     else:
         raise ValueError(
             f"Unsupported file format '{suffix}'. Accepted: .csv, .json, .xlsx, .xls"

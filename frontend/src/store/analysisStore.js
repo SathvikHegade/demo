@@ -121,9 +121,10 @@ export const useAnalysisStore = create((set, get) => ({
   stage: '',
   results: null,
   errorMessage: null,
+  uploadedFile: null,
 
   uploadFile: async (file, config = {}) => {
-    set({ status: 'uploading', datasetName: file.name, progress: 0, stage: 'Uploading', errorMessage: null });
+    set({ status: 'uploading', datasetName: file.name, progress: 0, stage: 'Uploading', errorMessage: null, uploadedFile: file });
     try {
       const job = await startAnalysis(file, config);
       set({ currentJobId: job.job_id, status: 'analyzing', progress: 0.05, stage: 'Queued' });
@@ -178,6 +179,7 @@ export const useAnalysisStore = create((set, get) => ({
       stage: '',
       results: null,
       errorMessage: null,
+      uploadedFile: null,
     }),
 
   // Demo mode — loads mock data without calling the backend
