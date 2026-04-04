@@ -4,12 +4,15 @@
  * Uses relative paths (/api/...) so Vite proxy routes them to localhost:8000.
  */
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
 export async function startAnalysis(file, config = {}) {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('config', JSON.stringify(config));
 
-  const res = await fetch('/api/analyze', {
+
+  const res = await fetch(`${API_BASE}/api/analyze`, {
     method: 'POST',
     body: formData,
   });
@@ -24,7 +27,7 @@ export async function startAnalysis(file, config = {}) {
 
 /** GET /api/report/{jobId} — poll for results */
 export async function getReport(jobId) {
-  const res = await fetch(`/api/report/${jobId}`);
+  const res = await fetch(`${API_BASE}/api/report/${jobId}`);
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: res.statusText }));
@@ -36,12 +39,12 @@ export async function getReport(jobId) {
 
 /** GET /health */
 export async function checkHealth() {
-  const res = await fetch('/health');
+  const res = await fetch(`${API_BASE}/health`);
   return res.json();
 }
 
 export async function importFromKaggle(datasetId) {
-  const res = await fetch('/api/import/kaggle', {
+  const res = await fetch(`${API_BASE}/api/import/kaggle`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ dataset_id: datasetId }),
@@ -54,7 +57,7 @@ export async function importFromKaggle(datasetId) {
 }
 
 export async function importFromSheets(url) {
-  const res = await fetch('/api/import/sheets', {
+  const res = await fetch(`${API_BASE}/api/import/sheets`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ url }),
@@ -67,7 +70,7 @@ export async function importFromSheets(url) {
 }
 
 export async function importFromHuggingFace(datasetName, split = 'train', maxRows = 10000) {
-  const res = await fetch('/api/import/huggingface', {
+  const res = await fetch(`${API_BASE}/api/import/huggingface`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ dataset_name: datasetName, split, max_rows: maxRows }),
