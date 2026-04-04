@@ -39,6 +39,14 @@ class CleaningConfig(BaseModel):
         description="Outlier detection method.",
     )
     cap_outliers: bool = Field(True, description="Cap outliers at bounds instead of removing.")
+    iqr_multiplier: float = Field(
+        1.5, ge=0.5, le=5.0,
+        description="IQR fence multiplier. Default 1.5 (standard). Use 3.0 for loose fences.",
+    )
+    zscore_threshold: float = Field(
+        3.0, ge=1.0, le=6.0,
+        description="Z-score threshold for outlier detection. Default 3.0 (99.7% of normal data).",
+    )
 
     # Type inference
     infer_types: bool = Field(True, description="Auto-infer and convert column types.")

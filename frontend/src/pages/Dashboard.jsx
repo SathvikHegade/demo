@@ -154,6 +154,38 @@ const CleanConfigGrid = ({ config, setConfig }) => {
               <CSelect value={config.outlier_method} onChange={v => setConfig({ outlier_method: v })} options={outlierOptions} />
             </div>
             <CToggle value={config.cap_outliers} onChange={v => setConfig({ cap_outliers: v })} label="Cap at bounds (winsorize)" />
+            {config.outlier_method === 'iqr' && (
+              <div style={{ marginTop: 10 }}>
+                <CSlider
+                  value={config.iqr_multiplier ?? 1.5}
+                  min={0.5} max={5.0} step={0.1}
+                  onChange={v => setConfig({ iqr_multiplier: v })}
+                  label="IQR fence multiplier"
+                  format={v => `${v.toFixed(1)}×`}
+                />
+                <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 10, color: C.muted, marginTop: 4, lineHeight: 1.4 }}>
+                  {(config.iqr_multiplier ?? 1.5) <= 1.5 ? '1.5× — standard (removes more outliers)' :
+                   (config.iqr_multiplier ?? 1.5) <= 2.5 ? '2.0–2.5× — moderate fence' :
+                   '3.0+× — loose fence (keeps more data)'}
+                </div>
+              </div>
+            )}
+            {config.outlier_method === 'zscore' && (
+              <div style={{ marginTop: 10 }}>
+                <CSlider
+                  value={config.zscore_threshold ?? 3.0}
+                  min={1.0} max={6.0} step={0.1}
+                  onChange={v => setConfig({ zscore_threshold: v })}
+                  label="Z-score threshold"
+                  format={v => `${v.toFixed(1)}σ`}
+                />
+                <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 10, color: C.muted, marginTop: 4, lineHeight: 1.4 }}>
+                  {(config.zscore_threshold ?? 3.0) <= 2.0 ? '≤2σ — aggressive (removes ~5% normal data)' :
+                   (config.zscore_threshold ?? 3.0) <= 3.0 ? '3σ — standard (99.7% of normal retained)' :
+                   '4σ+ — conservative (keeps near-outliers)'}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>

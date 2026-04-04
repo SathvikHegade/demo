@@ -103,7 +103,10 @@ export async function startCleaning(file, config = {}) {
 
 /** GET /api/clean/status/{jobId} — poll for cleaning results */
 export async function getCleaningStatus(jobId) {
-  const res = await fetch(`${API_BASE}/api/clean/status/${jobId}`);
+  const res = await fetch(
+    `${API_BASE}/api/clean/status/${jobId}?_=${Date.now()}`,  // ← cache-bust
+    { cache: "no-store" }                                      // ← fetch directive
+  );
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: res.statusText }));
     throw new Error(err.detail || `Status fetch failed: ${res.status}`);

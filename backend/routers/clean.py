@@ -9,13 +9,14 @@ import io
 import json
 import logging
 import os
+import re
 import tempfile
 import uuid
 from pathlib import Path
 
 import aiofiles
 from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, JSONResponse
 
 from models.cleaning_models import (
     CleaningConfig,
@@ -38,11 +39,11 @@ OUTPUT_DIR = Path(tempfile.gettempdir()) / "dataforge_clean_outputs"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# In-memory token store: download_token → file path
-_DOWNLOAD_STORE: dict[str, str] = {}
+# In-memory token store: download_token → (file_path, original_filename)
+_DOWNLOAD_STORE: dict[str, tuple[str, str]] = {}
 
 
-async def _run_cleaning(job_id: str, file_path: str, config: CleaningConfig) -> None:
+async def _run_cleaning(job_id: str, file_path: str, config: CleaningConfig, original_filename: str = "dataset") -> None:
     try:
         job_store.update_progress(job_id, 0.05, "Loading dataset")
         df, size_mb = await load_dataset(file_path)
@@ -61,6 +62,8 @@ async def _run_cleaning(job_id: str, file_path: str, config: CleaningConfig) -> 
             handle_outliers=config.handle_outliers,
             outlier_method=config.outlier_method,
             cap_outliers=config.cap_outliers,
+            iqr_multiplier=config.iqr_multiplier,
+            zscore_threshold=config.zscore_threshold,
             infer_types=config.infer_types,
             apply_type_conversions=config.apply_type_conversions,
         )
@@ -69,7 +72,7 @@ async def _run_cleaning(job_id: str, file_path: str, config: CleaningConfig) -> 
         download_token = str(uuid.uuid4())
         out_path = str(OUTPUT_DIR / f"{download_token}.csv")
         await asyncio.to_thread(df_clean.to_csv, out_path, index=False)
-        _DOWNLOAD_STORE[download_token] = out_path
+        _DOWNLOAD_STORE[download_token] = (out_path, original_filename)
         logger.info("Saved cleaned dataset to %s", download_token)
 
         # ── Build response model ──────────────────────────────────────────────
@@ -172,13 +175,14 @@ async def clean_dataset(
 
     job_id = str(uuid.uuid4())
     temp_path = str(UPLOAD_DIR / f"{job_id}{suffix}")
+    original_filename = Path(file.filename or "dataset").stem  # e.g. "sales_data"
 
     async with aiofiles.open(temp_path, "wb") as out:
         while chunk := await file.read(1024 * 256):
             await out.write(chunk)
 
     job_store.set_processing(job_id, 0.0, "Queued")
-    background_tasks.add_task(_run_cleaning, job_id, temp_path, cleaning_config)
+    background_tasks.add_task(_run_cleaning, job_id, temp_path, cleaning_config, original_filename)
 
     return CleaningJobStatus(
         job_id=job_id,
@@ -189,17 +193,25 @@ async def clean_dataset(
     )
 
 
-@router.get(
-    "/api/clean/status/{job_id}",
-    tags=["Cleaning"],
-)
+@router.get("/api/clean/status/{job_id}", tags=["Cleaning"])
 async def get_cleaning_status(job_id: str):
-    """Poll the cleaning job status."""
     entry = job_store.get(job_id)
     if not entry:
         raise HTTPException(status_code=404, detail=f"Job {job_id} not found.")
-    return entry
 
+    if isinstance(entry, dict):
+        content = entry
+    elif isinstance(entry, str) and entry.startswith("failed:"):
+        raise HTTPException(status_code=500, detail=entry[len("failed:"):])
+    elif isinstance(entry, CleaningReport):
+        content = {"status": "complete", "report": entry.model_dump()}
+    else:
+        raise HTTPException(status_code=500, detail="Unexpected job state.")
+
+    return JSONResponse(
+        content=content,
+        headers={"Cache-Control": "no-store"},  # ← prevents browser caching GET responses
+    )
 
 @router.get(
     "/api/clean/download/{token}",
@@ -207,9 +219,15 @@ async def get_cleaning_status(job_id: str):
 )
 async def download_cleaned_dataset(token: str):
     """Download the cleaned CSV by token returned in the CleaningReport."""
-    path = _DOWNLOAD_STORE.get(token)
-    if not path or not Path(path).exists():
+    entry = _DOWNLOAD_STORE.get(token)
+    if not entry:
         raise HTTPException(status_code=404, detail="Download token invalid or expired.")
+    path, original_filename = entry
+    if not Path(path).exists():
+        raise HTTPException(status_code=404, detail="Cleaned file no longer available on server.")
+
+    safe_name = re.sub(r"[^A-Za-z0-9_\-]", "_", original_filename)
+    download_name = f"{safe_name}_cleaned.csv"
 
     def iter_file():
         with open(path, "rb") as f:
@@ -219,5 +237,5 @@ async def download_cleaned_dataset(token: str):
     return StreamingResponse(
         iter_file(),
         media_type="text/csv",
-        headers={"Content-Disposition": f"attachment; filename=cleaned_{token[:8]}.csv"},
+        headers={"Content-Disposition": f'attachment; filename="{download_name}"'},
     )
